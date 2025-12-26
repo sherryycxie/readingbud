@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Literata:wght@400;600;700&display=swap");
+
 :root {
   --ink: #1a1a1a;
   --paper: #fef6e9;
@@ -12,7 +14,7 @@
 
 body {
   margin: 0;
-  font-family: "Georgia", "Times New Roman", serif;
+  font-family: "Literata", serif;
   color: var(--ink);
   background: linear-gradient(135deg, #f7e7c4 0%, #f6f0e6 45%, #f2e6d8 100%);
   min-height: 100vh;
@@ -281,6 +283,39 @@ input[type="search"] {
 
 .note-item button {
   justify-self: flex-start;
+}
+
+.reflection {
+  margin-top: 16px;
+  padding: 12px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: #fff;
+  display: grid;
+  gap: 8px;
+}
+
+.reflection label {
+  font-weight: 600;
+}
+
+.reflection textarea {
+  width: 100%;
+  min-height: 80px;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  padding: 8px;
+  font-family: inherit;
+}
+
+.reflection button {
+  border: none;
+  border-radius: 999px;
+  padding: 8px 12px;
+  background: var(--accent);
+  cursor: pointer;
+  font-weight: 600;
+  width: fit-content;
 }
 
 

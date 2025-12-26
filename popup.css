@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Literata:wght@400;600;700&display=swap");
+
 :root {
   color-scheme: light;
   --ink: #1c1c1c;
@@ -14,7 +16,7 @@
 
 body {
   margin: 0;
-  font-family: "Georgia", "Times New Roman", serif;
+  font-family: "Literata", serif;
   color: var(--ink);
   background: radial-gradient(circle at top, #fff3c2, #f8efe5 55%, #f2e7dc 100%);
   width: 320px;

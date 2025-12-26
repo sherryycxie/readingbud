@@ -261,6 +261,11 @@ function renderDetail({ bookmark, highlights }) {
             : "<div class=\"note-item empty\">No highlights yet.</div>"
         }
       </div>
+      <div class="reflection">
+        <label for="reflection-${bookmark.url}">✍️ Any thoughts you want to capture?</label>
+        <textarea id="reflection-${bookmark.url}" data-type="reflection-input" data-id="${bookmark.url}" placeholder="Write a quick reflection...">${bookmark.reflection || ""}</textarea>
+        <button data-type="save-reflection" data-id="${bookmark.url}">Save reflection</button>
+      </div>
       <button data-type="bookmark" data-id="${bookmark.url}">Remove folder</button>
     </article>
   `;
@@ -346,6 +351,17 @@ async function handleRemove(event) {
         item.id === id ? { ...item, note: textarea.value.trim() } : item
       );
       await setStorage(HIGHLIGHTS_KEY, updated);
+    }
+  }
+
+  if (type === "save-reflection") {
+    const textarea = detailContainer.querySelector(`textarea[data-type="reflection-input"][data-id="${id}"]`);
+    if (textarea) {
+      const items = await getStorage(BOOKMARKS_KEY);
+      const updated = items.map((item) =>
+        item.url === id ? { ...item, reflection: textarea.value.trim() } : item
+      );
+      await setStorage(BOOKMARKS_KEY, updated);
     }
   }
 
