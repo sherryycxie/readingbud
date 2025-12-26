@@ -149,26 +149,39 @@ async function init() {
   const existingTags = await getStorage(TAGS_KEY);
   cachedTags = existingTags;
 
+  const existingBookmarks = await getStorage(BOOKMARKS_KEY);
+  const currentBookmark = existingBookmarks.find((item) => item.url === tab.url);
+  if (currentBookmark && currentBookmark.tags && currentBookmark.tags.length) {
+    bookmarkTagsInput.value = currentBookmark.tags.join(", ") + ", ";
+  }
+
   const bookmarkBtn = document.getElementById("bookmark-btn");
   bookmarkBtn.addEventListener("click", async () => {
     const updated = await getStorage(BOOKMARKS_KEY);
-    if (!updated.find((item) => item.url === tab.url)) {
-      const rawTags = parseTags(bookmarkTagsInput.value);
-      const tagList = mergeTags([], rawTags);
-      const existingTags = await getStorage(TAGS_KEY);
-      const mergedTags = mergeTags(existingTags, tagList).sort((a, b) => a.localeCompare(b));
+    const rawTags = parseTags(bookmarkTagsInput.value);
+    const tagList = mergeTags([], rawTags);
+    const existingTags = await getStorage(TAGS_KEY);
+    const mergedTags = mergeTags(existingTags, tagList).sort((a, b) => a.localeCompare(b));
+    const existingIndex = updated.findIndex((item) => item.url === tab.url);
+
+    if (existingIndex === -1) {
       updated.unshift({
         url: tab.url,
         title: tab.title || tab.url,
         tags: tagList,
         createdAt: new Date().toISOString()
       });
-      await setStorage(BOOKMARKS_KEY, updated);
-      await setStorage(TAGS_KEY, mergedTags);
-      cachedTags = mergedTags;
-      renderTagSuggestions(cachedTags, getActiveToken(bookmarkTagsInput.value));
-      renderBookmarks(updated);
+    } else {
+      const existing = updated[existingIndex];
+      const mergedPageTags = mergeTags(existing.tags || [], tagList);
+      updated[existingIndex] = { ...existing, tags: mergedPageTags };
     }
+
+    await setStorage(BOOKMARKS_KEY, updated);
+    await setStorage(TAGS_KEY, mergedTags);
+    cachedTags = mergedTags;
+    renderTagSuggestions(cachedTags, getActiveToken(bookmarkTagsInput.value));
+    renderBookmarks(updated);
   });
 
   const libraryBtn = document.getElementById("library-btn");
@@ -180,6 +193,10 @@ async function init() {
     renderTagSuggestions(cachedTags, getActiveToken(bookmarkTagsInput.value));
   });
 
+  bookmarkTagsInput.addEventListener("focus", () => {
+    renderTagSuggestions(cachedTags, getActiveToken(bookmarkTagsInput.value));
+  });
+
   tagSuggestions.addEventListener("click", (event) => {
     const button = event.target.closest(".tag-suggestion");
     if (!button) {
@@ -187,6 +204,14 @@ async function init() {
     }
     const tag = button.dataset.tag;
     bookmarkTagsInput.value = replaceActiveToken(bookmarkTagsInput.value, tag);
+    renderTagSuggestions(cachedTags, getActiveToken(bookmarkTagsInput.value));
+  });
+
+  chrome.storage.onChanged.addListener((changes, area) => {
+    if (area !== "local" || !changes[TAGS_KEY]) {
+      return;
+    }
+    cachedTags = changes[TAGS_KEY].newValue || [];
     renderTagSuggestions(cachedTags, getActiveToken(bookmarkTagsInput.value));
   });
 }
