@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reading Vault Library</title>
+    <link rel="stylesheet" href="library.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <div>
+          <h1>Reading Vault</h1>
+          <p>Review everything you saved.</p>
+        </div>
+        <input id="search" type="search" placeholder="Search highlights or URLs" />
+      </header>
+
+      <div class="vault-layout">
+        <aside>
+          <h2>Folders</h2>
+          <div class="tag-create">
+            <input id="tag-input" type="text" placeholder="Create a tag" />
+            <button id="tag-add">Add</button>
+          </div>
+          <div id="tag-list" class="tag-list"></div>
+          <div id="vault" class="folder-list"></div>
+        </aside>
+
+        <section class="detail">
+          <div id="detail"></div>
+        </section>
+      </div>
+    </main>
+
+    <script src="library.js"></script>
+  </body>
+</html>

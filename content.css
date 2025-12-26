@@ -1,0 +1,60 @@
+.codex-highlight {
+  background: #fff3a6;
+  box-shadow: inset 0 -0.2em 0 #f7d36a;
+  padding: 0 0.1em;
+  border-radius: 2px;
+}
+
+.codex-highlight-preview {
+  background: rgba(88, 149, 230, 0.35) !important;
+  box-shadow: inset 0 -0.2em 0 rgba(88, 149, 230, 0.65) !important;
+  padding: 0 0.1em;
+  border-radius: 2px;
+}
+
+.codex-highlight-toolbar {
+  position: absolute;
+  z-index: 2147483647;
+  background: #111;
+  color: #fff;
+  border-radius: 10px;
+  padding: 8px 10px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: "Segoe UI", Tahoma, sans-serif;
+  font-size: 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+}
+
+.codex-highlight-toolbar input {
+  width: 180px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 4px 6px;
+  background: #1f1f1f !important;
+  color: #fff !important;
+  caret-color: #fff !important;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.codex-highlight-toolbar input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.codex-highlight-toolbar button {
+  border: none;
+  border-radius: 6px;
+  padding: 4px 8px;
+  background: #f7d36a;
+  color: #1b1b1b;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.codex-highlight-toolbar button.secondary {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+}

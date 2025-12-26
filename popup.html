@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Highlights</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Reading Vault</h1>
+      <p>Save pages, highlights, and notes.</p>
+    </header>
+
+    <section class="actions">
+      <button id="bookmark-btn">Bookmark this page</button>
+      <button id="library-btn" class="secondary">Open library</button>
+    </section>
+
+    <section>
+      <h2>Tags</h2>
+      <input id="bookmark-tags" type="text" placeholder="Add tags (comma separated)" />
+      <div id="bookmark-tag-suggestions" class="tag-suggestions"></div>
+    </section>
+
+    <section>
+      <h2>This page</h2>
+      <div id="page-meta" class="meta"></div>
+      <div id="highlights-list" class="list"></div>
+    </section>
+
+    <section>
+      <h2>Bookmarks</h2>
+      <div id="bookmarks-list" class="list"></div>
+    </section>
+
+    <script src="popup.js"></script>
+  </body>
+</html>
